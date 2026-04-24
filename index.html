@@ -14,8 +14,8 @@
                     colors: {
                         brand: {
                             black: '#18181B',
-                            primary: '#FACC15',
-                            primaryDark: '#EAB308',
+                            primary: '#c778f5',     // Ubah ke Ungu #c778f5
+                            primaryDark: '#b058e0', // Versi lebih gelap untuk hover/active
                             gray: '#F4F4F5'
                         }
                     },
@@ -26,7 +26,8 @@
                     boxShadow: {
                         'card': '0 0 0 1px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.05)',
                         'float': '0 20px 40px -10px rgba(0,0,0,0.1)',
-                        'glow': '0 0 20px rgba(250,204,21,0.3)',
+                        // Mengubah warna glow shadow ke ungu transparan
+                        'glow': '0 0 20px rgba(199,120,245,0.4)', 
                         'hard': '3px 3px 0px 0px rgba(0,0,0,1)',
                         'hard-lg': '4px 4px 0px 0px rgba(0,0,0,1)',
                     }
@@ -110,7 +111,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #c778f5;
+            background: #c778f5; /* Warna ungu sesuai request */
             border: 3px solid #18181B;
         }
 
@@ -544,7 +545,7 @@
                 Zare, kami nggak mau banyak bicara lagi. Cukup ingat ini: <strong class="text-zinc-800">kamu dipilih bukan tanpa alasan</strong>. Kamu punya kemampuan, kamu punya hati, dan kamu punya kami di belakangmu. 
             </p>
             <p class="text-zinc-500 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-                Selamat menjalankan misi, Guru Zare. Kami tunggu kamu pulang dengan <strong class="text-zinc-800">sepenuh dada dan penuh cerita</strong>. Love you, bestie! 💛
+                Selamat menjalankan misi, Guru Zare. Kami tunggu kamu pulang dengan <strong class="text-zinc-800">sepenuh dada dan penuh cerita</strong>. Love you, bestie! 💜
             </p>
 
             <!-- Signature -->
@@ -552,7 +553,7 @@
                 <div class="w-16 h-px bg-zinc-300 mb-4"></div>
                 <p class="font-serif text-xl italic text-zinc-400">— Teman-temanmu yang selalu bangga</p>
                 <div class="flex gap-2 mt-3">
-                    <span>💛</span><span>🖤</span><span>💛</span>
+                    <span>💜</span><span>🖤</span><span>💜</span>
                 </div>
             </div>
         </div>
@@ -606,7 +607,7 @@
                 <p class="font-semibold text-zinc-800">Go get 'em, bestie! 🇲🇾✨</p>
 
                 <div class="pt-4 border-t border-zinc-200">
-                    <p class="italic text-zinc-400">Dengan sepenuh hati,<br>Temanmu yang bangga banget sama kamu 💛</p>
+                    <p class="italic text-zinc-400">Dengan sepenuh hati,<br>Temanmu yang bangga banget sama kamu 💜</p>
                 </div>
             </div>
 
@@ -699,7 +700,7 @@
                 text.style.color = '';
             } else {
                 box.dataset.checked = 'true';
-                box.style.backgroundColor = '#FACC15';
+                box.style.backgroundColor = '#c778f5'; // Ubah ke ungu
                 box.style.borderColor = '#000000';
                 icon.style.opacity = '1';
                 text.style.textDecoration = 'line-through';
@@ -746,7 +747,8 @@
 
         // Confetti on page load (subtle)
         function createConfetti() {
-            const colors = ['#FACC15', '#18181B', '#F4F4F5', '#EAB308', '#D4D4D8'];
+            // Mengganti warna konfeti menjadi tema ungu
+            const colors = ['#c778f5', '#b058e0', '#18181B', '#F4F4F5', '#D4D4D8'];
             const shapes = ['■', '●', '▲', '★'];
 
             for (let i = 0; i < 20; i++) {
