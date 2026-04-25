@@ -14,8 +14,8 @@
                     colors: {
                         brand: {
                             black: '#18181B',
-                            primary: '#c778f5',     // Ubah ke Ungu #c778f5
-                            primaryDark: '#b058e0', // Versi lebih gelap untuk hover/active
+                            primary: '#c778f5',     // Warna Ungu
+                            primaryDark: '#b058e0',
                             gray: '#F4F4F5'
                         }
                     },
@@ -26,7 +26,6 @@
                     boxShadow: {
                         'card': '0 0 0 1px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.05)',
                         'float': '0 20px 40px -10px rgba(0,0,0,0.1)',
-                        // Mengubah warna glow shadow ke ungu transparan
                         'glow': '0 0 20px rgba(199,120,245,0.4)', 
                         'hard': '3px 3px 0px 0px rgba(0,0,0,1)',
                         'hard-lg': '4px 4px 0px 0px rgba(0,0,0,1)',
@@ -49,25 +48,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
         @keyframes confetti-fall {
             0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
@@ -75,9 +55,6 @@
         .animate-fade-up { animation: fadeInUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }
-        .animate-slide-left { animation: slideInLeft 0.8s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
-        .animate-slide-right { animation: slideInRight 0.8s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
-        .animate-scale-in { animation: scaleIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; }
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
@@ -111,7 +88,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #c778f5; /* Warna ungu sesuai request */
+            background: #c778f5;
             border: 3px solid #18181B;
         }
 
@@ -140,13 +117,11 @@
             animation: float 2s ease-in-out infinite;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #F4F4F5; }
         ::-webkit-scrollbar-thumb { background: #D4D4D8; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
 
-        /* Modal */
         .modal-overlay {
             opacity: 0;
             pointer-events: none;
@@ -208,10 +183,10 @@
         </div>
 
         <div class="relative z-10 text-center max-w-4xl mx-auto">
-            <!-- Badge -->
+            <!-- Badge (Diberikan ID untuk update otomatis) -->
             <div class="animate-fade-up inline-flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-4 py-2 mb-8 shadow-sm">
                 <span class="w-2 h-2 bg-brand-primary rounded-full animate-pulse-soft"></span>
-                <span class="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Keberangkatan Besok</span>
+                <span id="statusBadge" class="text-xs font-semibold text-zinc-500 uppercase tracking-widest">Menghitung Waktu...</span>
             </div>
 
             <!-- Main heading -->
@@ -233,12 +208,12 @@
             <div class="animate-fade-up delay-500 flex items-center justify-center gap-4 text-sm text-zinc-400 mb-10">
                 <span class="flex items-center gap-1.5">
                     <span class="iconify" data-icon="lucide:calendar" data-width="14"></span>
-                    <span id="departDate"></span>
+                    <span id="displayDate">--</span>
                 </span>
                 <span>•</span>
                 <span class="flex items-center gap-1.5">
                     <span class="iconify" data-icon="lucide:map-pin" data-width="14"></span>
-                    Malaysia
+                    <span id="locationText">Malaysia</span>
                 </span>
                 <span>•</span>
                 <span class="flex items-center gap-1.5">
@@ -281,7 +256,7 @@
                 </div>
                 <div class="bg-white rounded-2xl border border-zinc-200 p-6 text-center shadow-card hover:border-black transition-colors">
                     <div class="text-3xl mb-2">📅</div>
-                    <div class="text-2xl sm:text-3xl font-bold font-serif">30</div>
+                    <div class="text-2xl sm:text-3xl font-bold font-serif">28</div>
                     <div class="text-xs text-zinc-400 mt-1 font-medium">Hari Mengajar</div>
                 </div>
                 <div class="bg-white rounded-2xl border border-zinc-200 p-6 text-center shadow-card hover:border-black transition-colors">
@@ -315,7 +290,7 @@
                     <div class="text-3xl mb-4">🎯</div>
                     <h3 class="font-bold text-lg mb-2">Ini Bukan Sekadar Trip</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
-                        Kamu nggak cuma jalan-jalan ke Malaysia. Kamu membawa misi — mengajar, membimbing, dan jadi panutan buat anak-anak SD di sana. Itu hal yang <strong class="text-zinc-700">luar biasa besar</strong>.
+                        ini bukan sekadar perjalanan biasa. Kamu ke Malaysia membawa misi yang keren banget; mengajar dan jadi sosok yang bisa digugu sama anak-anak di sana. Jujur,  Itu hal yang <strong class="text-zinc-700">luar biasa besar</strong> dan nggak semua orang punya kesempatan atau keberanian buat ambil peran itu.
                     </p>
                 </div>
 
@@ -324,8 +299,7 @@
                     <div class="text-3xl mb-4">🌧️</div>
                     <h3 class="font-bold text-lg mb-2">Boleh Sedih, Tapi Jangan Berhenti</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
-                        Kalau suatu hari kamu kangen rumah, rindu makanan Indonesia, atau merana sendirian di kamar — itu <strong class="text-zinc-700">wajar banget</strong>. Nangis boleh, tapi besoknya bangun dan tetap semangat ya.
-                    </p>
+                        Nanti kalau di sana ada momen kamu merasa sedih, itu manusiawi banget. Kalau tiba-tiba kangen rumah, kangen makanan kita, atau merasa kesepian di kamar, nggak apa-apa... <strong class="text-zinc-700">nikmati aja rasanya.</strong> Nangis sebentar boleh kok, tapi setelah itu bangun lagi dan ingat kembali tujuan kamu.
                 </div>
 
                 <!-- Card 3 -->
@@ -333,7 +307,7 @@
                     <div class="text-3xl mb-4">🌱</div>
                     <h3 class="font-bold text-lg mb-2">Kamu Menanam Benih</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
-                        Satu bulan mungkin terasa singkat. Tapi coba bayangkan — kata-katamu, senyummu, caramu mengajar... itu bisa jadi <strong class="text-zinc-700">kenangan terindah</strong> buat anak-anak itu selamanya.
+                        Satu bulan mungkin terasa singkat. Tapi coba bayangkan kata-katamu, senyummu, caramu mengajar... itu bisa jadi <strong class="text-zinc-700">kenangan terindah</strong> buat anak-anak itu selamanya.
                     </p>
                 </div>
 
@@ -351,7 +325,7 @@
                     <div class="text-3xl mb-4">🤝</div>
                     <h3 class="font-bold text-lg mb-2">Kamu Nggak Sendirian</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
-                        Meskipun jarak kita jauh, aku selalu ada di sini. Kalau butuh tempat cerita, mau video call curhat, atau cuma mau cerita hal random, <strong class="text-zinc-700">aku siap 24/7.</strong>. Jangan pernah sungkan, yaa.
+                        Meskipun jarak kita jauh, aku selalu ada di sini. Kalau butuh tempat cerita, mau video call curhat, atau cuma mau cerita hal random, <strong class="text-zinc-700">aku siap 24/7.</strong> Jangan pernah sungkan, yaa.
                     </p>
                 </div>
 
@@ -395,7 +369,7 @@
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-2 bg-brand-primary/10 rounded-full px-4 py-1.5 mb-4">
-                    <span class="text-xs font-bold text-brand-primaryDark uppercase tracking-widest">Panduan 30 Hari</span>
+                    <span class="text-xs font-bold text-brand-primaryDark uppercase tracking-widest">Panduan 28 Hari</span>
                 </div>
                 <h2 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight mb-4">Tips Buat Kamu di Setiap Fase</h2>
                 <p class="text-zinc-500 text-sm max-w-md mx-auto">Satu bulan itu ada fase-fasenya. Ini panduan kecil supaya kamu selalu dalam kondisi terbaik.</p>
@@ -431,7 +405,7 @@
 
                 <!-- Phase 4 -->
                 <div class="timeline-dot relative">
-                    <div class="bg-brand-primary text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3">Hari 26–30</div>
+                    <div class="bg-brand-primary text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-block mb-3">Hari 26–28</div>
                     <h3 class="font-bold text-lg mb-1">Fase Perpisahan 🥹</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
                         Ini yang paling berat. Anak-anak pasti nangis, kamu mungkin juga. Tapi ingat — ini bukan akhir, ini awal dari cerita indah yang bakal kamu ceritakan selamanya. Abadikan momen terakhir ini!
@@ -528,7 +502,8 @@
                             <div class="text-[10px] uppercase tracking-widest text-zinc-500 mt-1">Detik</div>
                         </div>
                     </div>
-                    <p class="text-zinc-400 text-sm">Menuju keberangkatan Zare ke Malaysia ✈️</p>
+                    <!-- Diberikan ID untuk update otomatis -->
+                    <p id="countdownLabel" class="text-zinc-400 text-sm">Menuju keberangkatan Zare ke Malaysia ✈️</p>
                 </div>
             </div>
         </div>
@@ -542,16 +517,16 @@
                 Pulang dengan Cerita,<br>Berangkat dengan Nyali
             </h2>
             <p class="text-zinc-500 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto">
-                Zare, kami nggak mau banyak bicara lagi. Cukup ingat ini: <strong class="text-zinc-800">kamu dipilih bukan tanpa alasan</strong>. Kamu punya kemampuan, kamu punya hati, dan kamu punya kami di belakangmu. 
+                Zare, cukup ingat ini: <strong class="text-zinc-800">kamu dipilih bukan tanpa alasan</strong>. Kamu punya kemampuan, kamu punya hati, dan kamu punya aku di belakangmu. 
             </p>
             <p class="text-zinc-500 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-                Selamat menjalankan misi, Guru Zare. Kami tunggu kamu pulang dengan <strong class="text-zinc-800">sepenuh dada dan penuh cerita</strong>. Love you, bestie! 💜
+                Selamat menjalankan misi, Ibu Guru Zare. Aku tunggu kamu pulang dengan <strong class="text-zinc-800">semua ceritanya</strong>.
             </p>
 
             <!-- Signature -->
             <div class="inline-flex flex-col items-center">
                 <div class="w-16 h-px bg-zinc-300 mb-4"></div>
-                <p class="font-serif text-xl italic text-zinc-400">— Teman-temanmu yang selalu bangga</p>
+                <p class="font-serif text-xl italic text-zinc-400">— Seseorang yang selalu bangga</p>
                 <div class="flex gap-2 mt-3">
                     <span>💜</span><span>🖤</span><span>💜</span>
                 </div>
@@ -568,7 +543,7 @@
                 </div>
                 <span class="text-xs text-zinc-400">Buat Zare dengan ❤️</span>
             </div>
-            <p class="text-xs text-zinc-400">Selamat mengajar di Malaysia! 🇲🇾 — 2025</p>
+            <p class="text-xs text-zinc-400">Selamat mengajar di Malaysia! 🇲🇾 — 2026</p>
         </div>
     </footer>
 
@@ -588,7 +563,7 @@
 
                 <p>Hai Zare, besok waktunya kamu berangkat! Masih nggak nyangka akhirnya hari ini tiba juga.</p>
 
-                <p>Aku cuma mau bilang kalau aku bangga banget sama kamu. Dari semua orang yang aku kenal, kamu itu salah satu yang paling berani. Nggak gampang lho mutusin buat keluar dari zona nyaman, apalagi sampai harus mengajar anak-anak di negara orang. Mungkin di luar kamu kelihatan tenang dan bilang 'siap', tapi aku tahu pasti ada rasa deg-degan juga di dalam hati—dan itu wajar banget.</p>
+                <p>Aku cuma mau bilang kalau aku bangga banget sama kamu. Dari semua orang yang aku kenal, kamu itu salah satu yang paling berani. Nggak gampang lho mutusin buat keluar dari zona nyaman, apalagi sampai harus mengajar anak-anak di negara orang. Mungkin di luar kamu kelihatan tenang dan bilang 'siap' tapi aku tahu pasti ada rasa deg-degan juga di dalam hati dan itu wajar banget.</p>
 
                 <p>Satu bulan di Malaysia itu bakal jadi perjalanan yang penuh warna. Pasti akan ada hari di mana kamu merasa senang banget karena murid-muridmu bisa nyambung sama kamu. Tapi kalau nanti ada hari di mana kamu merasa lelah, atau kangen rumah, tolong ingat ini ya:</p>
 
@@ -596,11 +571,11 @@
                     "Kamu nggak perlu sempurna. Kamu cukup hadir dengan tulus, dan itu sudah lebih dari cukup."
                 </div>
 
-                <p>Anak-anak disana hanya butuh seseorang yang <strong class="text-zinc-800">mau duduk sama mereka, tersenyum sama mereka, dan bikin mereka merasa dihargai.</strong>. Dan aku tau kamu ahlinya Zare.</p>
+                <p>Anak-anak disana hanya butuh seseorang yang <strong class="text-zinc-800">mau duduk sama mereka, tersenyum sama mereka, dan bikin mereka merasa dihargai.</strong> Dan aku tau kamu ahlinya Zare.</p>
 
-                <p>Oh iya, tolong jangan cuek sama kesehatan sendiri ya. Makan yang benar, jangan begadang, dan banyak minum air putih. Ingat, di sini ada aba, ibu, ade kamu yang selalu suport, mendoakan dan nungguin kabar dari kamu. aku juga ada ko</p>
+                <p>Oh iya, tolong jangan cuek sama kesehatan sendiri ya. Makan yang benar, jangan begadang, dan banyak minum air putih. Ingat, di sini ada aba, ibu, ade kamu yang selalu suport, mendoakan dan nungguin kabar dari kamu.Aku juga ada koo.</p>
 
-                <p>Nanti pas pulang, aku mau denger semua cerita kamu yaa! Dari yang paling lucu, yang sedih, sampai yang bikin emosi sekalipun, aku bakal dengerin semuanyaaa</p>
+                <p>Nanti pas pulang, aku mau denger semua cerita kamu yaa, dari yang paling lucu, yang sedih, sampai yang bikin emosi sekalipun, aku bakal dengerin semuanyaaa.</p>
 
                 <p>Sekarang, tarik napas dalam-dalam. Siapkan hati dan pikiran kamu baik-baik. Kamu hebat, Zare, dan sebenarnya kamu sudah siap untuk ini dari lama.</p>
 
@@ -628,25 +603,61 @@
     </div>
 
     <script>
-        // Set departure date (tomorrow)
-        function getDepartureDate() {
-            const now = new Date();
-            const tomorrow = new Date(now);
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setHours(0, 0, 0, 0);
-            return tomorrow;
+        // === LOGIKA TANGGAL BARU ===
+        
+        // Definisi Tanggal
+        const dateDeparture = new Date("May 2, 2026 00:00:00").getTime();
+        const dateReturn = new Date("May 29, 2026 00:00:00").getTime();
+        
+        let currentTargetDate = dateDeparture; // Default target
+        
+        // Fungsi untuk mengecek status dan update tampilan
+        function checkStatusAndTarget() {
+            const now = new Date().getTime();
+
+            // Logika Switch:
+            // Jika waktu sekarang SEBELUM 2 Mei 2026 -> Target 2 Mei
+            // Jika waktu sekarang SETELAH 2 Mei 2026 -> Target 29 Mei
+            if (now < dateDeparture) {
+                currentTargetDate = dateDeparture;
+                updateUI("Keberangkatan: 2 Mei 2026", "Menuju keberangkatan Zare ke Malaysia ✈️", "Malaysia");
+            } else {
+                currentTargetDate = dateReturn;
+                updateUI("Sedang Mengajar / Menuju Pulang", "Menuju kepulangan Zare ke Indonesia 🇮🇩", "Indonesia");
+            }
         }
 
-        const departDate = getDepartureDate();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('departDate').textContent = departDate.toLocaleDateString('id-ID', options);
+        // Fungsi Update Teks HTML
+        function updateUI(badgeText, label, location) {
+            // Update Badge
+            const badge = document.getElementById('statusBadge');
+            if(badge) badge.textContent = badgeText;
 
-        // Countdown
+            // Update Label Countdown
+            const countLabel = document.getElementById('countdownLabel');
+            if(countLabel) countLabel.textContent = label;
+
+            // Update Tanggal Display di Hero
+            const dateObj = new Date(currentTargetDate);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateDisplay = document.getElementById('displayDate'); // Menggunakan ID baru yang saya buat
+            if(dateDisplay) dateDisplay.textContent = dateObj.toLocaleDateString('id-ID', options);
+
+            // Update Lokasi Text
+            const locText = document.getElementById('locationText');
+            if(locText) locText.textContent = location;
+        }
+
+        // Countdown Timer
         function updateCountdown() {
-            const now = new Date();
-            const diff = departDate - now;
+            // Cek status setiap kali loop (untuk menangani perubahan saat tab terbuka lama)
+            checkStatusAndTarget(); 
+            
+            const now = new Date().getTime();
+            let diff = currentTargetDate - now;
 
-            if (diff <= 0) {
+            // Jika waktu sudah lewat target (misal setelah 29 Mei)
+            if (diff < 0) {
                 document.getElementById('cd-days').textContent = '00';
                 document.getElementById('cd-hours').textContent = '00';
                 document.getElementById('cd-mins').textContent = '00';
@@ -665,8 +676,13 @@
             document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
         }
 
-        updateCountdown();
+        // Jalankan sekali saat load untuk set teks awal
+        checkStatusAndTarget();
+        // Interval untuk update hitungan
         setInterval(updateCountdown, 1000);
+
+
+        // === FUNGSI LAINNYA (Tetap Sama) ===
 
         // Letter modal
         function openLetter() {
@@ -747,7 +763,6 @@
 
         // Confetti on page load (subtle)
         function createConfetti() {
-            // Mengganti warna konfeti menjadi tema ungu
             const colors = ['#c778f5', '#b058e0', '#18181B', '#F4F4F5', '#D4D4D8'];
             const shapes = ['■', '●', '▲', '★'];
 
