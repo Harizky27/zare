@@ -300,6 +300,7 @@
                     <h3 class="font-bold text-lg mb-2">Boleh Sedih, Tapi Jangan Berhenti</h3>
                     <p class="text-zinc-500 text-sm leading-relaxed">
                         Nanti kalau di sana ada momen kamu merasa sedih, itu manusiawi banget. Kalau tiba-tiba kangen rumah, kangen makanan rumah, atau merasa kesepian di kamar, nggak apa-apa... <strong class="text-zinc-700">nikmatin aja rasa kangennya.</strong> Nangis sebentar boleh kok, tapi setelah itu bangun lagi dan ingat lagi tujuan kamu.
+                    </p>
                 </div>
 
                 <!-- Card 3 -->
@@ -606,7 +607,7 @@
         // === LOGIKA TANGGAL BARU ===
         
         // Definisi Tanggal
-        const dateDeparture = new Date("May 2, 2026 00:00:00").getTime();
+        const dateDeparture = new Date("May 2, 2026 05:15:00").getTime(); // Diubah ke jam 05:15 pagi
         const dateReturn = new Date("May 29, 2026 00:00:00").getTime();
         
         let currentTargetDate = dateDeparture; // Default target
@@ -616,11 +617,11 @@
             const now = new Date().getTime();
 
             // Logika Switch:
-            // Jika waktu sekarang SEBELUM 2 Mei 2026 -> Target 2 Mei
-            // Jika waktu sekarang SETELAH 2 Mei 2026 -> Target 29 Mei
+            // Jika waktu sekarang SEBELUM 2 Mei 2026 jam 05:15 -> Target 2 Mei jam 05:15
+            // Jika waktu sekarang SETELAH 2 Mei 2026 jam 05:15 -> Target 29 Mei
             if (now < dateDeparture) {
                 currentTargetDate = dateDeparture;
-                updateUI("Keberangkatan: 2 Mei 2026", "Menuju keberangkatan Zare ke Malaysia ✈️", "Malaysia");
+                updateUI("Keberangkatan: 2 Mei 2026 05:15", "Menuju keberangkatan Zare ke Malaysia ✈️", "Malaysia");
             } else {
                 currentTargetDate = dateReturn;
                 updateUI("Sedang Mengajar / Menuju Pulang", "Menuju kepulangan Zare ke Indonesia 🇮🇩", "Indonesia");
